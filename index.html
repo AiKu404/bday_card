@@ -29,10 +29,8 @@
     <div id="birthdayText"></div>
     <div class="cake-container">
       <div class="cake" id="cake"></div>
-      <!-- Add your next webpage button here -->
     </div>
   </div>
-  <a href="padlock.html" id="nextButton">Next Surprise ➔</a>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -73,7 +71,7 @@
         const col = i % candlesPerRow;
         const totalCandlesInRow = Math.min(
           candlesPerRow,
-          count - (row * candlesPerRow)
+          count - row * candlesPerRow
         );
         const rowSpacing = availableWidth / (totalCandlesInRow + 1);
 
@@ -82,7 +80,7 @@
 
         candle.style.position = "absolute";
         candle.style.top = `${10 + row * 3}px`;
-        candle.style.left = `${leftBase - rowShift + 4}px`;
+        candle.style.left = `${leftBase + rowShift + 4}px`;
 
         cake.appendChild(candle);
       }
@@ -107,9 +105,11 @@
         const subTitle = document.getElementById("subTitle");
         subTitle.textContent = `Yayy! Wishing you the happiest birthday ever!!`;
 
-        // Reveal the next button
-        const nextBtn = document.getElementById("nextButton");
-        nextBtn.classList.add("show");
+        // Hidden 6-second countdown to automatically redirect to padlock.html
+        setTimeout(() => {
+          window.location.href = "padlock.html";
+        }, 4500);
+
       }, 1200);
 
       document.body.removeEventListener("click", blowOutCandles);
