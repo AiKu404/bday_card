@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter Passcode</title>
+  <link rel="stylesheet" href="padlock.css" />
+</head>
+<body>
+
+  <div class="padlock-wrapper">
+    <!-- Left Section: Photo Frame -->
+    <div class="left-panel">
+      <!-- Background floral elements -->
+      <span class="decor-symbol" style="top: 10%; left: 10%;">🌟</span>
+      <span class="decor-symbol" style="top: 15%; right: 12%;">✨</span>
+      <span class="decor-symbol" style="bottom: 12%; left: 15%;">✨</span>
+      <span class="decor-symbol" style="bottom: 8%; right: 10%;">🌟</span>
+
+      <!-- Rectangular Photo Frame -->
+      <div class="photo-frame-wrapper">
+        <div class="photo-frame">
+          <!-- Replace 'us.jpg' with the path to your photo -->
+          <img src="padlock-us.jpg" alt="Photo of Us">
+        </div>
+        <!-- Floral decorations around frame -->
+        <span class="flower flower-top-left">🪷</span>
+        <span class="flower flower-top-right">🪷</span>
+        <span class="flower flower-bottom-left">🪷</span>
+        <span class="flower flower-bottom-right">🪷</span>
+        <span class="flower flower-mid-left">🌻</span>
+        <span class="flower flower-mid-right">🌻</span>
+        <span class="flower flower-mid-top">🪻</span>
+        <span class="flower flower-mid-bottom">🪻</span>
+      </div>
+    </div>
+
+    <!-- Right Section: Keypad -->
+    <div class="right-panel">
+      <div class="keypad-header">Enter a passcode</div>
+
+      <!-- PIN Display -->
+      <div class="pin-display">
+        <div class="pin-box" id="digit-0"></div>
+        <div class="pin-box" id="digit-1"></div>
+        <div class="pin-box" id="digit-2"></div>
+        <div class="pin-box" id="digit-3"></div>
+      </div>
+
+      <!-- Keypad -->
+      <div class="keypad-grid">
+        <button class="key-btn" onclick="pressKey('1')">1</button>
+        <button class="key-btn" onclick="pressKey('2')">2</button>
+        <button class="key-btn" onclick="pressKey('3')">3</button>
+        <button class="key-btn" onclick="pressKey('4')">4</button>
+        <button class="key-btn" onclick="pressKey('5')">5</button>
+        <button class="key-btn" onclick="pressKey('6')">6</button>
+        <button class="key-btn" onclick="pressKey('7')">7</button>
+        <button class="key-btn" onclick="pressKey('8')">8</button>
+        <button class="key-btn" onclick="pressKey('9')">9</button>
+        <button class="key-btn action-btn" onclick="clearPin()">Clear</button>
+        <button class="key-btn" onclick="pressKey('0')">0</button>
+        <button class="key-btn action-btn" onclick="deleteDigit()">⌫</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Set your 4-digit passcode here
+    const CORRECT_PIN = "2210";
+    // Destination URL after unlocking
+    const NEXT_PAGE_URL = "surprise.html";
+
+    let currentPin = "";
+
+    function pressKey(num) {
+      if (currentPin.length < 4) {
+        currentPin += num;
+        updateDisplay();
+
+        if (currentPin.length === 4) {
+          setTimeout(checkPin, 200);
+        }
+      }
+    }
+
+    function deleteDigit() {
+      if (currentPin.length > 0) {
+        currentPin = currentPin.slice(0, -1);
+        updateDisplay();
+      }
+    }
+
+    function clearPin() {
+      currentPin = "";
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      for (let i = 0; i < 4; i++) {
+        const box = document.getElementById(`digit-${i}`);
+        box.classList.remove('error');
+        if (i < currentPin.length) {
+          box.textContent = "•";
+          box.classList.add("filled");
+        } else {
+          box.textContent = "";
+          box.classList.remove("filled");
+        }
+      }
+    }
+
+    function checkPin() {
+      if (currentPin === CORRECT_PIN) {
+        window.location.href = NEXT_PAGE_URL;
+      } else {
+        // Trigger error animation on wrong pin
+        for (let i = 0; i < 4; i++) {
+          const box = document.getElementById(`digit-${i}`);
+          box.classList.add('error');
+        }
+        setTimeout(() => {
+          clearPin();
+        }, 500);
+      }
+    }
+  </script>
+</body>
+</html>

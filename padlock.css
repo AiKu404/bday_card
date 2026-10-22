@@ -1,0 +1,190 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Outer layout wrapper */
+.padlock-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+/* Left panel - Soft Creamy Pastel Cyan */
+.left-panel {
+  flex: 1;
+  background-color: #f0fafd;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-right: 2px solid #e1f5fe;
+}
+
+/* Soft Photo Frame */
+/* Expand photo frame to occupy 80% of the left panel */
+.photo-frame-wrapper {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  max-width: none;  /* Removes previous size cap */
+  max-height: none; /* Removes previous size cap */
+  border-radius: 24px;
+  padding: 16px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(180, 210, 220, 0.3);
+  outline: 4px dashed #a0e0e0;
+  outline-offset: -10px;
+}
+
+.photo-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  background-color: #e2f7f7;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Decorative flowers */
+.flower {
+  position: absolute;
+  font-size: 34px;
+  user-select: none;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
+}
+.flower-top-left     { top: -22px; left: -22px; }
+.flower-top-right    { top: -22px; right: -22px; }
+.flower-bottom-left  { bottom: -22px; left: -22px; }
+.flower-bottom-right { bottom: -22px; right: -22px; }
+.flower-mid-left     { top: 50%; left: -26px; transform: translateY(-50%); }
+.flower-mid-right    { top: 50%; right: -26px; transform: translateY(-50%); }
+.flower-mid-top      { top: -26px; left: 50%; transform: translateX(-50%); }
+.flower-mid-bottom   { bottom: -26px; left: 50%; transform: translateX(-50%); }
+
+.decor-symbol {
+  position: absolute;
+  color: #81d4fa;
+  opacity: 0.5;
+  font-size: 28px;
+  user-select: none;
+}
+
+/* Right panel - Muted Soft Pastel Blue */
+.right-panel {
+  flex: 1;
+  background-color: #b3e5fc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #546e7a;
+}
+
+.keypad-header {
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 600;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+  color: #37474f;
+}
+
+.pin-display {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.pin-box {
+  width: clamp(45px, 5vw, 65px);
+  height: clamp(45px, 5vw, 65px);
+  border: 2px solid #ffffff;
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #455a64;
+  transition: all 0.2s ease;
+}
+
+.pin-box.filled {
+  background-color: #ffffff;
+  box-shadow: 0 3px 8px rgba(120, 160, 180, 0.2);
+}
+
+.pin-box.error {
+  border-color: #ef9a9a;
+  animation: shake 0.3s ease-in-out;
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px 25px;
+}
+
+.key-btn {
+  width: clamp(65px, 7vw, 90px);
+  height: clamp(65px, 7vw, 90px);
+  border-radius: 50%;
+  border: none;
+  background-color: #ffffff;
+  color: #546e7a;
+  font-size: 26px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(100, 140, 160, 0.12);
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.key-btn:active {
+  transform: scale(0.94);
+  background-color: #e1f5fe;
+}
+
+.key-btn.action-btn {
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.45);
+  color: #455a64;
+}
+
+.key-btn.action-btn:active {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
